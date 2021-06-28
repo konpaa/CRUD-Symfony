@@ -3,10 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Article
 {
@@ -15,22 +19,24 @@ class Article
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
-    private $body;
+    private string $body;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime")
      */
-    private $updated_at;
+    private DateTimeInterface $updated_at;
 
     public function getId(): ?int
     {
@@ -61,15 +67,23 @@ class Article
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updated_at): self
+    public function setUpdatedAt(DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setUpdatedAtValue()
+    {
+        $this->updated_at = new DateTime();
     }
 }
