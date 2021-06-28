@@ -3,9 +3,15 @@
 {% block title %}Article{% endblock %}
 
 {% block body %}
+    <a href="{{ path('about') }}">About</a>
     <a href="{{ path('create_article') }}">Create article</a>
+    {% if articles|length > 1 %}
     {% for article in articles %}
-    <h1>{{ article.name }}</h1>
+    <h1><a href="{{ path('article', { id:article.id }) }}">{{ article.name }}</a></h1>
     <p>{{ article.body }}</p>
     {% endfor %}
+    {% else %}
+        <h1>{{ articles.name }}</h1>
+        <p>{{ articles.body }}</p>
+    {% endif %}
 {% endblock %}

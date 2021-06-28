@@ -23,11 +23,24 @@ class ShowArticleController extends AbstractController
     /**
      * @Route("/show/article", name="show_article")
      */
-    public function index(): Response
+    public function show(): Response
     {
         $article = $this->articleRepository->findAll();
         return $this->render('show_article/index.html.twig', [
             'articles' => $article,
+        ]);
+    }
+
+    /**
+     * @Route("/article/{id}", name="article")
+     * @param int $id
+     * @return Response
+     */
+    public function showOneArticle(int $id): Response
+    {
+
+        return $this->render('show_article/index.html.twig', [
+            'articles' => $this->articleRepository->findOneBy(['id' => $id])
         ]);
     }
 }
