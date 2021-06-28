@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <a href="{{ path('create_article') }}">Create article</a>
+    {% for article in articles %}
+    <h1>{{ article.name }}</h1>
+    <p>{{ article.body }}</p>
+    {% endfor %}
+{% endblock %}
