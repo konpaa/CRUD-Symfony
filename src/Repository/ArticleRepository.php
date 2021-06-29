@@ -35,4 +35,15 @@ class ArticleRepository extends ServiceEntityRepository
         $this->_em->persist($article);
         $this->_em->flush();
     }
+
+    /**
+     * @param Article $article
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function deleted(Article $article)
+    {
+        $this->_em->remove($article);
+        $this->_em->flush();
+    }
 }

@@ -14,3 +14,6 @@ import bsCustomFileInput from 'bs-custom-file-input';
 import './bootstrap';
 
 bsCustomFileInput.init();
+
+const ujs = require('@rails/ujs');
+ujs.start();

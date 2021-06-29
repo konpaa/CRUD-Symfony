@@ -3,6 +3,11 @@
 {% block title %}Create Article{% endblock %}
 
 {% block body %}
-    <h1>Create Article</h1>
-    {{ form(article_form) }}
+<div class="col-12 col-lg-4 form">
+    <div class="bg-light shadow border rounded-lg p-4">
+        <h1>Create Article</h1>
+        {{ form(article_form) }}
+    </div>
+</div>
+
 {% endblock %}

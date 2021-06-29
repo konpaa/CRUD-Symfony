@@ -16,6 +16,8 @@
         <a class="link-dark text-decoration-none m-5" href="{{ path('show_article') }}">Show article</a>
         <div class="text-center mt-lg-5">
         <h3><a class="text-decoration-none" href="{{ path('edit_article', {id:articles.id}, 'edit') }}">Update</a></h3>
+            <h3><a class="text-decoration-none" href="{{ path('deleted_article', {id:articles.id}, 'deleted') }}"
+                   data-confirm="Вы уверены?" data-method="delete" rel="nofollow">Deleted</a></h3>
         <h1>{{ articles.name }}</h1>
         <p>{{ articles.body }}</p>
         </div>
