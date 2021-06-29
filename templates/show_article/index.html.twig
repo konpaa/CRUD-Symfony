@@ -3,8 +3,6 @@
 {% block title %}Article{% endblock %}
 
 {% block body %}
-    <a class="link-dark text-decoration-none m-5" href="{{ path('about') }}">About</a>
-    <a class="link-dark text-decoration-none m-5" href="{{ path('create_article') }}">Create article</a>
     {% if articles|length > 1 %}
     {% for article in articles %}
         <div class="m-lg-5 text-lg-center">
@@ -13,7 +11,6 @@
         </div>
     {% endfor %}
     {% else %}
-        <a class="link-dark text-decoration-none m-5" href="{{ path('show_article') }}">Show article</a>
         <div class="text-center mt-lg-5">
         <h3><a class="text-decoration-none" href="{{ path('edit_article', {id:articles.id}, 'edit') }}">Update</a></h3>
             <h3><a class="text-decoration-none" href="{{ path('deleted_article', {id:articles.id}, 'deleted') }}"
