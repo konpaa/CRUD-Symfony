@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Dto\Transformer\ArticleDtoTransformer;
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,14 +11,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class ShowArticleController extends AbstractController
 {
     private ArticleRepository $articleRepository;
+    private ArticleDtoTransformer $articleDtoTransformer;
 
     /**
      * ShowArticleController constructor.
      * @param ArticleRepository $articleRepository
+     * @param ArticleDtoTransformer $articleDtoTransformer
      */
-    public function __construct(ArticleRepository $articleRepository)
+    public function __construct(ArticleRepository $articleRepository, ArticleDtoTransformer $articleDtoTransformer)
     {
         $this->articleRepository = $articleRepository;
+        $this->articleDtoTransformer = $articleDtoTransformer;
     }
 
     /**
@@ -27,7 +31,7 @@ class ShowArticleController extends AbstractController
     {
         $article = $this->articleRepository->findAll();
         return $this->render('show_article/index.html.twig', [
-            'articles' => $article,
+            'articles' => $this->articleDtoTransformer->transformFromObjects($article),
         ]);
     }
 
@@ -38,9 +42,9 @@ class ShowArticleController extends AbstractController
      */
     public function showOneArticle(int $id): Response
     {
-
+        $article = $this->articleRepository->findOneBy(['id' => $id]);
         return $this->render('show_article/index.html.twig', [
-            'articles' => $this->articleRepository->findOneBy(['id' => $id])
+            'articles' => $this->articleDtoTransformer->transformFromObject($article)
         ]);
     }
 }

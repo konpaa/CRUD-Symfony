@@ -3,15 +3,21 @@
 {% block title %}Article{% endblock %}
 
 {% block body %}
-    <a href="{{ path('about') }}">About</a>
-    <a href="{{ path('create_article') }}">Create article</a>
+    <a class="link-dark text-decoration-none m-5" href="{{ path('about') }}">About</a>
+    <a class="link-dark text-decoration-none m-5" href="{{ path('create_article') }}">Create article</a>
     {% if articles|length > 1 %}
     {% for article in articles %}
-    <h1><a href="{{ path('article', { id:article.id }) }}">{{ article.name }}</a></h1>
+        <div class="m-lg-5 text-lg-center">
+    <h1><a class="text-decoration-none" href="{{ path('article', { id:article.id }) }}">{{ article.name }}</a></h1>
     <p>{{ article.body }}</p>
+        </div>
     {% endfor %}
     {% else %}
+        <a class="link-dark text-decoration-none m-5" href="{{ path('show_article') }}">Show article</a>
+        <div class="text-center mt-lg-5">
+        <h3><a class="text-decoration-none" href="{{ path('edit_article', {id:articles.id}, 'edit') }}">Update</a></h3>
         <h1>{{ articles.name }}</h1>
         <p>{{ articles.body }}</p>
+        </div>
     {% endif %}
 {% endblock %}
