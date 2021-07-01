@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Dto\Transformer;
-
 
 use App\Dto\ArticleDto;
 use App\Entity\Article;
@@ -24,5 +22,4 @@ class ArticleDtoTransformer extends AbstractDtoTransformer
 
         return $dto;
     }
-
 }

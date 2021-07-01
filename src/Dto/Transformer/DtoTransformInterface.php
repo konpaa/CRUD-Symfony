@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Dto\Transformer;
-
 
 interface DtoTransformInterface
 {

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Dto\Transformer;
-
 
 abstract class AbstractDtoTransformer implements DtoTransformInterface
 {
@@ -15,5 +13,4 @@ abstract class AbstractDtoTransformer implements DtoTransformInterface
         }
         return $dto;
     }
-
 }

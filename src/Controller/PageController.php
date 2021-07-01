@@ -15,4 +15,12 @@ class PageController extends AbstractController
     {
         return $this->render('page/index.html.twig');
     }
+
+    /**
+     * @Route("/", name="home")
+     */
+    public function home(): Response
+    {
+        return $this->render('page/home.html.twig');
+    }
 }
