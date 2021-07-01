@@ -12,6 +12,11 @@
             <a class="nav-item nav-link" href="{{ path('about') }}">About</a>
             <a class="nav-item nav-link" href="{{ path('create_article') }}">Create</a>
             <a class="nav-item nav-link" href="{{ path('show_article') }}">Show List</a>
+            {% if app.user %}
+            <li><a class="nav-item nav-link" href="{{ path('app_logout') }}">Logout</a></li>
+            {% endif %}
+            <li><a class="nav-item nav-link" href="{{ path('app_login') }}">Login</a></li>
+            <li><a class="nav-item nav-link" href="{{ path('registration') }}">Register</a></li>
             <a class="nav-item nav-link disabled" href="#">Continue...</a>
         </div>
     </div>

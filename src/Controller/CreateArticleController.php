@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Class CreateArticleController
@@ -23,13 +24,17 @@ class CreateArticleController extends AbstractController
      */
     private ArticleRepository $articleRepository;
 
+    private AuthorizationCheckerInterface $authChecker;
+
     /**
      * CreateArticleController constructor.
      * @param ArticleRepository $articleRepository
+     * @param AuthorizationCheckerInterface $authChecker
      */
-    public function __construct(ArticleRepository $articleRepository)
+    public function __construct(ArticleRepository $articleRepository, AuthorizationCheckerInterface $authChecker)
     {
         $this->articleRepository = $articleRepository;
+        $this->authChecker = $authChecker;
     }
 
 
@@ -40,6 +45,10 @@ class CreateArticleController extends AbstractController
      */
     public function index(Request $request): Response
     {
+        if (false === $this->authChecker->isGranted('ROLE_USER')) {
+            $this->addFlash('warning', 'Please sing in!');
+            return $this->redirectToRoute('about');
+        }
         $article = new Article();
 
         $form = $this->createForm(ArticleFormType::class, $article);
@@ -67,7 +76,10 @@ class CreateArticleController extends AbstractController
      */
     public function updateArticle(int $id, Request $request): Response
     {
-
+        if (false === $this->authChecker->isGranted('ROLE_USER')) {
+            $this->addFlash('warning', 'Please sing in!');
+            return $this->redirectToRoute('about');
+        }
         $article = $this->articleRepository->findOneBy(['id' => $id]);
         $form = $this->createForm(ArticleFormType::class, $article);
 
@@ -93,6 +105,10 @@ class CreateArticleController extends AbstractController
      */
     public function deletedArticle(int $id): Response
     {
+        if (false === $this->authChecker->isGranted('ROLE_USER')) {
+            $this->addFlash('warning', 'Please sing in!');
+            return $this->redirectToRoute('about');
+        }
         $article = $this->articleRepository->findOneBy(['id' => $id]);
         $this->articleRepository->deleted($article);
         $this->addFlash('warning', 'DELETED article!!');
