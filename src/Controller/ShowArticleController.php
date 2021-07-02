@@ -43,7 +43,7 @@ class ShowArticleController extends AbstractController
     public function showOneArticle(int $id): Response
     {
         $article = $this->articleRepository->findOneBy(['id' => $id]);
-        return $this->render('show_article/index.html.twig', [
+        return $this->render('show_article/oneArticle.html.twig', [
             'articles' => $this->articleDtoTransformer->transformFromObject($article)
         ]);
     }

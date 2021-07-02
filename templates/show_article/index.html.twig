@@ -3,20 +3,16 @@
 {% block title %}Article{% endblock %}
 
 {% block body %}
-    {% if articles|length > 1 %}
+    {% if articles|length > 0 %}
     {% for article in articles %}
         <div class="m-lg-5 text-lg-center">
     <h1><a class="text-decoration-none" href="{{ path('article', { id:article.id }) }}">{{ article.name }}</a></h1>
     <p>{{ article.body }}</p>
         </div>
     {% endfor %}
+    {% elseif app.user and articles|length < 1 %}
+        <h1 class="text-center noneArticle">Hello {{ app.user.name }} created new Article!!</h1>
     {% else %}
-        <div class="text-center mt-lg-5">
-        <h3><a class="text-decoration-none" href="{{ path('edit_article', {id:articles.id}, 'edit') }}">Update</a></h3>
-            <h3><a class="text-decoration-none" href="{{ path('deleted_article', {id:articles.id}, 'deleted') }}"
-                   data-confirm="Вы уверены?" data-method="delete" rel="nofollow">Deleted</a></h3>
-        <h1>{{ articles.name }}</h1>
-        <p>{{ articles.body }}</p>
-        </div>
+        <h1 class="text-center noneArticle">Login or Register!! And created Articles!!</h1>
     {% endif %}
 {% endblock %}

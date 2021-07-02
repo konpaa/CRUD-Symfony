@@ -7,6 +7,7 @@ use App\Form\ArticleFormType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,8 +32,10 @@ class CreateArticleController extends AbstractController
      * @param ArticleRepository $articleRepository
      * @param AuthorizationCheckerInterface $authChecker
      */
-    public function __construct(ArticleRepository $articleRepository, AuthorizationCheckerInterface $authChecker)
-    {
+    public function __construct(
+        ArticleRepository $articleRepository,
+        AuthorizationCheckerInterface $authChecker
+    ) {
         $this->articleRepository = $articleRepository;
         $this->authChecker = $authChecker;
     }
@@ -40,8 +43,7 @@ class CreateArticleController extends AbstractController
 
     /**
      * @Route("/create/article", name="create_article")
-     * @throws ORMException
-     * @throws OptimisticLockException
+     * @throws Exception
      */
     public function index(Request $request): Response
     {
@@ -55,9 +57,13 @@ class CreateArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->articleRepository->save($article);
-            $this->addFlash('success', 'Created new article!!!');
-            return $this->redirectToRoute('show_article');
+            try {
+                $this->articleRepository->save($article);
+                $this->addFlash('success', 'Created new article!!!');
+                return $this->redirectToRoute('show_article');
+            } catch (Exception $exception) {
+                echo $exception->getMessage();
+            };
         }
 
         return $this->render('create_article/index.html.twig', [
@@ -78,7 +84,7 @@ class CreateArticleController extends AbstractController
     {
         if (false === $this->authChecker->isGranted('ROLE_USER')) {
             $this->addFlash('warning', 'Please sing in!');
-            return $this->redirectToRoute('about');
+            return $this->redirectToRoute('article', ['id' => $id]);
         }
         $article = $this->articleRepository->findOneBy(['id' => $id]);
         $form = $this->createForm(ArticleFormType::class, $article);
@@ -107,7 +113,7 @@ class CreateArticleController extends AbstractController
     {
         if (false === $this->authChecker->isGranted('ROLE_USER')) {
             $this->addFlash('warning', 'Please sing in!');
-            return $this->redirectToRoute('about');
+            return $this->redirectToRoute('article', ['id' => $id]);
         }
         $article = $this->articleRepository->findOneBy(['id' => $id]);
         $this->articleRepository->deleted($article);
