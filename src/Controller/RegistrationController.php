@@ -46,7 +46,7 @@ class RegistrationController extends AbstractController
             } catch (OptimisticLockException | ORMException $e) {
                 $this->addFlash('danger', $e->getMessage());
             }
-
+            $this->addFlash('success', "Success registration");
             return $this->redirectToRoute('app_login');
         }
 
