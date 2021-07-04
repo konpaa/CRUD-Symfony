@@ -8,6 +8,7 @@
         <div class="m-lg-5 text-lg-center">
     <h1><a class="text-decoration-none" href="{{ path('article', { id:article.id }) }}">{{ article.name }}</a></h1>
     <p>{{ article.body }}</p>
+            <p>{{ article.updated_at | date('d-m-Y \ T H:i:s') }}</p>
         </div>
     {% endfor %}
     {% elseif app.user and articles|length < 1 %}

@@ -2,7 +2,7 @@
 
 namespace App\Dto;
 
-use DateTimeInterface;
+use DateTime;
 use JMS\Serializer\Annotation as Serialization;
 
 class ArticleDto
@@ -23,7 +23,7 @@ class ArticleDto
     public string $body;
 
     /**
-     * @Serialization\Type("DateTime<Y-m-d\TH:i:s>")
+     * @Serialization\Type("DateTime<'Y-m-d\TH:i:s'>")
      */
-    public DateTimeInterface $updated_at;
+    public DateTime $updated_at;
 }

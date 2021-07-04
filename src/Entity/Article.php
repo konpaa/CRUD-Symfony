@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use DateTime;
-use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -36,7 +35,7 @@ class Article
     /**
      * @ORM\Column(type="datetime")
      */
-    private DateTimeInterface $updated_at;
+    private DateTime $updated_at;
 
     public function getId(): ?int
     {
@@ -67,12 +66,12 @@ class Article
         return $this;
     }
 
-    public function getUpdatedAt(): DateTimeInterface
+    public function getUpdatedAt(): DateTime
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(DateTimeInterface $updated_at): self
+    public function setUpdatedAt(DateTime $updated_at): self
     {
         $this->updated_at = $updated_at;
 
