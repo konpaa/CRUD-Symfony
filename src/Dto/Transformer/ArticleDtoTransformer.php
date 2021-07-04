@@ -18,7 +18,8 @@ class ArticleDtoTransformer extends AbstractDtoTransformer
         $dto->id = $article->getId();
         $dto->name = $article->getName();
         $dto->body = $article->getBody();
-        $dto->updated_at = $article->getUpdatedAt();
+        $dto->createdAt = $article->getCreatedAt();
+        $dto->updatedAt = $article->getUpdatedAt();
 
         return $dto;
     }

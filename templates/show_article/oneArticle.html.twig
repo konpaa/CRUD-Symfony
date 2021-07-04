@@ -9,5 +9,11 @@
            data-confirm="Вы уверены?" data-method="delete" rel="nofollow">Deleted</a></h3>
     <h1>{{ articles.name }}</h1>
     <p>{{ articles.body }}</p>
+    <div class="text-info">
+    <p>Created: {{ articles.createdAt | date('d-m-Y \ T H:i:s')}}</p>
+    {% if articles.updatedAt %}
+    <p>Changed: {{ articles.updatedAt | date('d-m-Y \ T H:i:s')}}</p>
+    {% endif %}
+    </div>
 </div>
 {% endblock %}

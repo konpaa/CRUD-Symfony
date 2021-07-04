@@ -25,5 +25,10 @@ class ArticleDto
     /**
      * @Serialization\Type("DateTime<'Y-m-d\TH:i:s'>")
      */
-    public DateTime $updated_at;
+    public DateTime $createdAt;
+
+    /**
+     * @Serialization\Type("DateTime<'Y-m-d\TH:i:s'>")
+     */
+    public ?DateTime $updatedAt = null;
 }
