@@ -12,3 +12,7 @@ server:
 	symfony server:start
 lint:
 	composer phpcs
+start:
+	docker-compose up -d
+	symfony server:start -d
+
