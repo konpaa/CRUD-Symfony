@@ -4,9 +4,11 @@ namespace App\Form;
 
 use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
@@ -41,6 +43,13 @@ class ArticleFormType extends AbstractType
                             'minMessage' => 'Your body article small']
                     )
                 ]
+            ])
+            ->add('photo', FileType::class, [
+                'required' => false,
+                'mapped' => false, //не связана не с одним свойством
+                'constraints' => [
+                    new Image(['maxSize' => '1024k'])
+                ],
             ])
             ->add('submit', SubmitType::class);
     }

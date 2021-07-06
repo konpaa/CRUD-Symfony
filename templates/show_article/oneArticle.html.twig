@@ -14,6 +14,13 @@
     {% if articles.updatedAt %}
     <p>Changed: {{ articles.updatedAt | date('d-m-Y \ T H:i:s')}}</p>
     {% endif %}
+        {% if articles.photoFilename %}
+        <div class="comment-img mr-3">
+            <a href="{{ asset('uploads/photos/' ~ articles.photoFilename) }}" target="_blank">
+                <img src="{{ asset('uploads/photos/' ~ articles.photoFilename) }}" />
+            </a>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

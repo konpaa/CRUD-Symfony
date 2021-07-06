@@ -15,6 +15,14 @@
             {% endif %}
             </div>
         </div>
+
+        {% if article.photoFilename %}
+            <div class="comment-img mr-3">
+            <a href="{{ asset('uploads/photos/' ~ article.photoFilename) }}" target="_blank">
+                <img src="{{ asset('uploads/photos/' ~ article.photoFilename) }}" />
+            </a>
+            </div>
+        {% endif %}
     {% endfor %}
     {% elseif app.user and articles|length < 1 %}
         <h1 class="text-center noneArticle">Hello {{ app.user.name }} created new Article!!</h1>

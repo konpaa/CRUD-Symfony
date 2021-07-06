@@ -31,4 +31,9 @@ class ArticleDto
      * @Serialization\Type("DateTime<'Y-m-d\TH:i:s'>")
      */
     public ?DateTime $updatedAt = null;
+
+    /**
+     * @Serialization\Type("string")
+     */
+    public ?string $photoFilename;
 }

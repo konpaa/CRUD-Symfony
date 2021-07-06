@@ -45,7 +45,7 @@ class CreateArticleController extends AbstractController
      * @Route("/create/article", name="create_article")
      * @throws Exception
      */
-    public function index(Request $request): Response
+    public function index(Request $request, string $photoDir): Response
     {
         if (false === $this->authChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
             $this->addFlash('warning', 'Please sing in!');
@@ -57,10 +57,20 @@ class CreateArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($photo = $form['photo']->getData()) {
+                $filename = bin2hex(random_bytes(6)) . '.' . $photo->guessExtension(); //имя в public
+                try {
+                    $photo->move($photoDir, $filename);
+                } catch (Exception $exception) {
+                    $this->addFlash('danger', $exception->getMessage());
+                    return $this->redirectToRoute('home');
+                }
+                $article->setPhotoFilename($filename);
+            }
             try {
                 $this->articleRepository->save($article);
                 $this->addFlash('success', 'Created new article!!!');
-                return $this->redirectToRoute('show_article');
+                return $this->redirectToRoute('article', ['id' => $article->getId()]);
             } catch (Exception $exception) {
                 echo $exception->getMessage();
             };

@@ -43,6 +43,11 @@ class Article
      */
     private ?DateTime $updatedAt = null;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $photoFilename;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -110,5 +115,17 @@ class Article
     public function setUpdatedAtValue()
     {
         $this->updatedAt = new DateTime('now');
+    }
+
+    public function getPhotoFilename(): ?string
+    {
+        return $this->photoFilename;
+    }
+
+    public function setPhotoFilename(?string $photoFilename): self
+    {
+        $this->photoFilename = $photoFilename;
+
+        return $this;
     }
 }
