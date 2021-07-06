@@ -10,6 +10,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class DashboardController
+ * @package App\Controller\Admin
+ */
 class DashboardController extends AbstractDashboardController
 {
     /**
@@ -17,7 +21,12 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-        return parent::index();
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return parent::index();
+        } else {
+            $this->addFlash('danger', 'User tried to access a page without having ROLE_ADMIN');
+            return $this->redirectToRoute('app_login');
+        }
     }
 
     public function configureDashboard(): Dashboard

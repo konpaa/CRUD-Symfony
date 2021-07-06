@@ -4,23 +4,20 @@
             <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
         </svg>
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link" href="{{ path('about') }}">About</a>
-            <a class="nav-item nav-link" href="{{ path('create_article') }}">Create</a>
-            <a class="nav-item nav-link" href="{{ path('show_article') }}">Show List</a>
-            {% if app.user %}
-                <li><a class="nav-item nav-link" href="{{ path('app_logout') }}">Logout</a></li>
-            {% endif %}
+        <ul class="navbar-nav">
+            <li><a class="nav-item nav-link" href="{{ path('about') }}">About</a></li>
+            <li><a class="nav-item nav-link" href="{{ path('create_article') }}">Create</a></li>
+            <li><a class="nav-item nav-link" href="{{ path('show_article') }}">Show List</a></li>
+            <li><a class="nav-item nav-link disabled " href="#">Continue...</a></li>
+        </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li><a class="nav-item nav-link" href="{{ path('app_login') }}">Login</a></li>
             <li><a class="nav-item nav-link" href="{{ path('registration') }}">Register</a></li>
-            <li><a class="nav-item nav-link disabled" href="#">Continue...</a></li>
             {% if app.user %}
-            <li><a class="nav-item nav-link ps-5" href="#">Welcome {{ app.user.email }}</a></li>
+                <li><a class="nav-item nav-link" href="{{ path('app_logout') }}">Logout</a></li>
+                <li><a class="nav-item nav-link ps-2 pe-5" href="#">Welcome {{ app.user.email }}</a></li>
             {% endif %}
-        </div>
+        </ul>
     </div>
 </nav>
