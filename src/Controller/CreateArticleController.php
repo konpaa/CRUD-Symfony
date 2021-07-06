@@ -47,7 +47,7 @@ class CreateArticleController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        if (false === $this->authChecker->isGranted('ROLE_USER')) {
+        if (false === $this->authChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
             $this->addFlash('warning', 'Please sing in!');
             return $this->redirectToRoute('about');
         }
@@ -82,7 +82,7 @@ class CreateArticleController extends AbstractController
      */
     public function updateArticle(int $id, Request $request): Response
     {
-        if (false === $this->authChecker->isGranted('ROLE_USER')) {
+        if (false === $this->authChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
             $this->addFlash('warning', 'Please sing in!');
             return $this->redirectToRoute('article', ['id' => $id]);
         }
@@ -111,7 +111,7 @@ class CreateArticleController extends AbstractController
      */
     public function deletedArticle(int $id): Response
     {
-        if (false === $this->authChecker->isGranted('ROLE_USER')) {
+        if (false === $this->authChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
             $this->addFlash('warning', 'Please sing in!');
             return $this->redirectToRoute('article', ['id' => $id]);
         }
