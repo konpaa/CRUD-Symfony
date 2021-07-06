@@ -19,7 +19,7 @@
             <li><a class="nav-item nav-link" href="{{ path('registration') }}">Register</a></li>
             <li><a class="nav-item nav-link disabled" href="#">Continue...</a></li>
             {% if app.user %}
-            <li><a class="nav-item nav-link ps-5" href="#">Welcome {{ app.user.name }}</a></li>
+            <li><a class="nav-item nav-link ps-5" href="#">Welcome {{ app.user.email }}</a></li>
             {% endif %}
         </div>
     </div>
