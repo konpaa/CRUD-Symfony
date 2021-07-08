@@ -16,29 +16,39 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     *
+     * @var int|null $id
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     *
+     * @var string $email
      */
-    private $email;
+    private string $email;
 
     /**
      * @ORM\Column(type="json")
+     *
+     * @var array $roles
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     *
+     * @var string $password
      */
-    private $password;
+    private string $password;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @var string $name
      */
-    private $name = 'Admin';
+    private string $name = 'Admin';
 
     public function getId(): ?int
     {

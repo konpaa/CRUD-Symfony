@@ -19,52 +19,76 @@ class Article
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     *
+     * @var int|null $id
      */
     private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
+     *
+     * @var string $name
      */
     private string $name;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
+     *
+     * @var string $body
      */
     private string $body;
 
     /**
      * @ORM\Column(type="datetime")
+     *
+     * @var DateTimeInterface $createdAt
      */
-    private DateTime $createdAt;
+    private DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @var DateTimeInterface|null $updatedAt
      */
-    private ?DateTime $updatedAt = null;
+    private ?DateTimeInterface $updatedAt = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string|null $photoFilename
      */
-    private ?string $photoFilename;
+    private ?string $photoFilename = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
+     *
+     * @var UserInterface $creator
      */
     private UserInterface $creator;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -72,11 +96,18 @@ class Article
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getBody(): string
     {
         return $this->body;
     }
 
+    /**
+     * @param string $body
+     * @return $this
+     */
     public function setBody(string $body): self
     {
         $this->body = $body;
@@ -84,12 +115,19 @@ class Article
         return $this;
     }
 
-    public function getCreatedAt(): DateTime
+    /**
+     * @return DateTimeInterface
+     */
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTime $createdAt): self
+    /**
+     * @param DateTimeInterface $createdAt
+     * @return $this
+     */
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -104,11 +142,18 @@ class Article
         $this->createdAt = new DateTime();
     }
 
+    /**
+     * @return DateTimeInterface|null
+     */
     public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
 
+    /**
+     * @param DateTimeInterface|null $updatedAt
+     * @return $this
+     */
     public function setUpdatedAt(?DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
@@ -124,11 +169,18 @@ class Article
         $this->updatedAt = new DateTime('now');
     }
 
+    /**
+     * @return string|null
+     */
     public function getPhotoFilename(): ?string
     {
         return $this->photoFilename;
     }
 
+    /**
+     * @param string|null $photoFilename
+     * @return $this
+     */
     public function setPhotoFilename(?string $photoFilename): self
     {
         $this->photoFilename = $photoFilename;
@@ -136,11 +188,18 @@ class Article
         return $this;
     }
 
+    /**
+     * @return UserInterface
+     */
     public function getCreator(): UserInterface
     {
         return $this->creator;
     }
 
+    /**
+     * @param UserInterface $creator
+     * @return $this
+     */
     public function setCreator(UserInterface $creator): self
     {
         $this->creator = $creator;
@@ -148,6 +207,9 @@ class Article
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->getName();
