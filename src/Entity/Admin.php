@@ -35,6 +35,11 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name = 'Admin';
+
     public function getId(): ?int
     {
         return $this->id;
@@ -127,5 +132,17 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString(): string
     {
         return $this->getEmail();
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name = 'Admin'): self
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }

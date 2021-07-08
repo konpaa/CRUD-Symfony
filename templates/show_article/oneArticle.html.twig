@@ -5,12 +5,12 @@
 {% block body %}
 <div class="text-center mt-lg-5">
 
-    {% if app.user.email == articles.creator %}
+    {% if app.user.email == articles.creator.email %}
     <h3><a class="text-decoration-none" href="{{ path('edit_article', {id:articles.id}, 'edit') }}">Update</a></h3>
     <h3><a class="text-decoration-none" href="{{ path('deleted_article', {id:articles.id}, 'deleted') }}"
            data-confirm="Вы уверены?" data-method="delete" rel="nofollow">Deleted</a></h3>
     {% endif %}
-    <p>{{ articles.creator }}</p>
+    <p>{{ articles.creator.name }}</p>
     <h1>{{ articles.name }}</h1>
     <p>{{ articles.body }}</p>
     <div class="text-info">
