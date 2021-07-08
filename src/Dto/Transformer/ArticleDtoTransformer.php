@@ -21,6 +21,7 @@ class ArticleDtoTransformer extends AbstractDtoTransformer
         $dto->createdAt = $article->getCreatedAt();
         $dto->updatedAt = $article->getUpdatedAt();
         $dto->photoFilename = $article->getPhotoFilename();
+        $dto->creator = $article->getCreator();
 
         return $dto;
     }

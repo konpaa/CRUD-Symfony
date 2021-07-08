@@ -67,6 +67,9 @@ class CreateArticleController extends AbstractController
                 }
                 $article->setPhotoFilename($filename);
             }
+
+            $user = $this->getUser();
+            $article->setCreator($user);
             try {
                 $this->articleRepository->save($article);
                 $this->addFlash('success', 'Created new article!!!');

@@ -6,6 +6,7 @@ use App\Repository\ArticleRepository;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -47,6 +48,12 @@ class Article
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private ?string $photoFilename;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private UserInterface $creator;
 
     public function getId(): ?int
     {
@@ -127,5 +134,22 @@ class Article
         $this->photoFilename = $photoFilename;
 
         return $this;
+    }
+
+    public function getCreator(): UserInterface
+    {
+        return $this->creator;
+    }
+
+    public function setCreator(UserInterface $creator): self
+    {
+        $this->creator = $creator;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

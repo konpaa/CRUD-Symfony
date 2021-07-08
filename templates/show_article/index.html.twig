@@ -6,6 +6,7 @@
     {% if articles|length > 0 %}
     {% for article in articles %}
         <div class="m-lg-5 text-lg-center">
+            <p>{{ article.creator }}</p>
     <h1><a class="text-decoration-none" href="{{ path('article', { id:article.id }) }}">{{ article.name }}</a></h1>
     <p>{{ article.body }}</p>
             <div class="text-info">
@@ -25,7 +26,7 @@
         {% endif %}
     {% endfor %}
     {% elseif app.user and articles|length < 1 %}
-        <h1 class="text-center noneArticle">Hello {{ app.user.name }} created new Article!!</h1>
+        <h1 class="text-center noneArticle">Hello {{ app.user.email }} created new Article!!</h1>
     {% else %}
         <h1 class="text-center noneArticle">Login or Register!! And created Articles!!</h1>
     {% endif %}
