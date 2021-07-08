@@ -8,4 +8,17 @@ services:
       POSTGRES_PASSWORD: main
       POSTGRES_DB: main
     ports:
-      - "5433:5432"
+      - 5433:5432
+  mailer:
+    image: mailhog/mailhog
+    ports:
+    - 1025:1080
+    - 8025:8025
+    restart: on-failure
+    environment:
+      MAIL_MAILER: smtp
+      MAIL_HOST: 127.0.0.1
+      MAIL_PORT: 1025
+      MAIL_USERNAME: null
+      MAIL_PASSWORD: null
+      MAIL_ENCRYPTION: null

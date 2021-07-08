@@ -1,0 +1,18 @@
+{% extends '@email/default/notification/body.html.twig' %}
+
+{% block content %}
+    Author: {{ user.name }}<br />
+    Email: {{ user.email }}<br />
+    <h1>
+        {{ article.name }}
+    </h1>
+    <p>{{ article.body }}</p>
+    <p>Created: {{ article.createdAt | date('d-m-Y \ T H:i:s')}}</p>
+    {% if article.photoFilename %}
+        <div class="comment-img mr-3">
+            <a href="{{ asset('uploads/photos/' ~ article.photoFilename) }}" target="_blank">
+                <img src="{{ asset('uploads/photos/' ~ article.photoFilename) }}"  alt="{{ article.photoFilename }}"/>
+            </a>
+        </div>
+    {% endif %}
+{% endblock %}

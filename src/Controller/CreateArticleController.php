@@ -5,12 +5,14 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\ArticleFormType;
 use App\Repository\ArticleRepository;
+use App\Services\MailerSendServices;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -43,9 +45,9 @@ class CreateArticleController extends AbstractController
 
     /**
      * @Route("/create/article", name="create_article")
-     * @throws Exception
+     * @throws Exception|TransportExceptionInterface
      */
-    public function index(Request $request, string $photoDir): Response
+    public function index(Request $request, string $photoDir, MailerSendServices $mailerSend): Response
     {
         if (false === $this->authChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
             $this->addFlash('warning', 'Please sing in!');
@@ -72,6 +74,7 @@ class CreateArticleController extends AbstractController
             $article->setCreator($user);
             try {
                 $this->articleRepository->save($article);
+                $mailerSend->sendCreatedArticle($article, $user);
                 $this->addFlash('success', 'Created new article!!!');
                 return $this->redirectToRoute('article', ['id' => $article->getId()]);
             } catch (Exception $exception) {

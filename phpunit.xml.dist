@@ -6,10 +6,11 @@
          backupGlobals="false"
          colors="true"
          bootstrap="tests/bootstrap.php"
-         convertDeprecationsToExceptions="false"
 >
     <php>
         <ini name="error_reporting" value="-1" />
+        <server name="KERNEL_CLASS" value="App\Kernel" />
+        <env name="KERNEL_CLASS" value="App\Kernel" />
         <server name="APP_ENV" value="test" force="true" />
         <server name="SHELL_VERBOSITY" value="-1" />
         <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
@@ -31,6 +32,10 @@
     <listeners>
         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
     </listeners>
+
+    <extensions>
+        <extension class="Symfony\Component\Panther\ServerExtension" />
+    </extensions>
 
     <!-- Run `composer require symfony/panther` before enabling this extension -->
     <!--

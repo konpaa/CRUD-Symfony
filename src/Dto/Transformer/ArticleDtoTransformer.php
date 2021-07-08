@@ -8,20 +8,19 @@ use App\Entity\Article;
 class ArticleDtoTransformer extends AbstractDtoTransformer
 {
     /**
-     * @param Article $article
-     *
+     * @param Article $object
      * @return ArticleDto
      */
-    public function transformFromObject($article): ArticleDto
+    public function transformFromObject($object): ArticleDto
     {
         $dto = new ArticleDto();
-        $dto->id = $article->getId();
-        $dto->name = $article->getName();
-        $dto->body = $article->getBody();
-        $dto->createdAt = $article->getCreatedAt();
-        $dto->updatedAt = $article->getUpdatedAt();
-        $dto->photoFilename = $article->getPhotoFilename();
-        $dto->creator = $article->getCreator();
+        $dto->id = $object->getId();
+        $dto->name = $object->getName();
+        $dto->body = $object->getBody();
+        $dto->createdAt = $object->getCreatedAt();
+        $dto->updatedAt = $object->getUpdatedAt();
+        $dto->photoFilename = $object->getPhotoFilename();
+        $dto->creator = $object->getCreator();
 
         return $dto;
     }

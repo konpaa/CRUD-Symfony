@@ -8,9 +8,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class ShowArticleController
+ * @package App\Controller
+ */
 class ShowArticleController extends AbstractController
 {
+    /**
+     * @var ArticleRepository
+     */
     private ArticleRepository $articleRepository;
+
+    /**
+     * @var ArticleDtoTransformer
+     */
     private ArticleDtoTransformer $articleDtoTransformer;
 
     /**
