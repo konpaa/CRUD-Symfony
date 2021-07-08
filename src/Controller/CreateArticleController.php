@@ -99,6 +99,7 @@ class CreateArticleController extends AbstractController
             $this->addFlash('warning', 'Please sing in!');
             return $this->redirectToRoute('article', ['id' => $id]);
         }
+
         $article = $this->articleRepository->findOneBy(['id' => $id]);
         $form = $this->createForm(ArticleFormType::class, $article);
 
